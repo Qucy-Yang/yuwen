@@ -1,0 +1,461 @@
+%%
+%
+%[2019-9-10] 新语文整理
+%
+%
+%
+%
+%%
+\documentclass[a4paper]{article}
+\title{语文内容整理}
+\author{yangsx}
+\usepackage{tipa}
+\usepackage{fontspec,xunicode,xltxtra,makeidx,xecolor}
+\usepackage{listings,tabularx,amsfonts,amssymb}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage[normalem]{ulem}
+\usepackage{epigraph}
+\usepackage{amsthm}
+\usepackage{soul}
+\usepackage{exsheets}
+\usepackage{tasks}
+\usepackage{indentfirst}
+\usepackage{mdwlist}
+\usepackage{bchart}
+\SetupExSheets[question]{headings=margin-nr}
+\SetupExSheets[solution]{print=true}
+%\usepackage[nonumberlist, toc, acronym]{glossaries}
+\usepackage[nonumberlist, toc, acronym]{glossaries}
+\usepackage{tikz}
+\usepackage{tkz-base}
+\usetikzlibrary{arrows,shapes,trees,calc,fit,automata,positioning}
+\usetikzlibrary{shadows}
+\usetikzlibrary{patterns}
+\tikzset{
+  mybox/.style={
+    rectangle,
+    rounded corners,
+    draw=black
+  },
+}
+\usepackage{venndiagram}
+\usepackage{tikz-3dplot}
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{lipsum}
+
+\usepackage{frcursive}
+\usepackage{calligra}
+
+\usepackage{multirow}
+
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
+
+\usepackage{tcolorbox,colortbl}
+\tcbuselibrary{skins}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{lipsum}
+\usepackage{setspace}
+\usepackage{epigraph}
+\usepackage{fontspec,xunicode,xltxtra,makeidx,xecolor}
+\usepackage{xeCJK}
+\usepackage{xpinyin}
+%\xpinyinsetup{multiple={\color{red}}}
+%\setmainfont{SimSun}
+% 'DejaVu Serif'  'Ubuntu Mono'  'Droid Serif'  'DejaVu Sans'
+\setmainfont{DejaVu Sans}
+%\setCJKmainfont{SimSun}
+\setCJKmainfont{WenQuanYi Micro Hei}
+
+\newcommand{\setfont}[2]{{\fontfamily{#1}\selectfont #2}}
+
+%%
+%%
+% Droid Sans Hebrew  |  DejaVu Serif  | Droid Serif | Liberation Mono  | Ubuntu
+\newfontfamily\mylstfont{Droid Sans Mono}
+\newfontfamily\mydejavu{DejaVu Sans Mono}
+\newfontfamily\mylib{Liberation Sans Narrow}
+\newfontfamily\thekai{STKaiti}
+
+
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{0.5\baselineskip}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+
+\lstset{basicstyle=\scriptsize,frame=lines,breaklines=true,postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+
+\makeatletter
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
+\makeatother
+\setlength{\parindent} {2em}%中文缩进两个汉字位
+\setlength{\parskip}{0.5\baselineskip}
+
+\newcounter{mdexample}
+\counterwithin{mdexample}{section}
+
+%\newenvironment{coolexample}[1]
+\newenvironment{coolexample}[1]
+  {\stepcounter{mdexample}\begin{mdframed}[
+    frametitle=#1,
+    frametitlefont=\normalfont,
+    topline=false,
+    bottomline=false,
+    rightline=false,
+    linecolor=greentitleback,
+    linewidth=2pt,
+    singleextra={
+      \node[
+        overlay,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        fill=greentitleback,
+        font=\color{greentitle}\sffamily\scshape
+      ] at (O|-P) {example~\themdexample};
+      },
+    firstextra={
+      \node[
+        overlay,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        fill=greentitleback,
+        font=\color{greentitle}\sffamily\scshape
+      ] at (O|-P) {example~\themdexample};
+      }
+    ]
+  }
+  {\end{mdframed}}
+
+\newcolumntype{Y}{>{\raggedleft\arraybackslash}X}
+
+\tcbset{tab1/.style={fonttitle=\bfseries\large,fontupper=\normalsize\sffamily,
+colback=yellow!10!white,colframe=red!75!black,colbacktitle=red!40!white,
+coltitle=black,center title,freelance,frame code={
+\foreach \n in {north east,north west,south east,south west}
+{\path [fill=red!75!black] (interior.\n) circle (3mm); };},}}
+
+\tcbset{tab2/.style={enhanced,fonttitle=\bfseries,fontupper=\normalsize\sffamily,
+colback=yellow!10!white,colframe=red!50!black,colbacktitle=red!40!white,
+coltitle=black,center title}}
+
+%% Try new a my own code 用于扩展词汇的统一处理
+\newcounter{myexpandnum}
+\newcounter{mydemonum}
+
+\newenvironment{myexpand}[1][]{\refstepcounter{myexpandnum} \tikz [baseline={([yshift=-.8ex]current bounding box.center)}] \shade [ball color=red] (0,0) circle (1ex); \colorbox{blue!30}{易错例\themyexpandnum- \vspace{0.5cm}} \tikz [baseline={([yshift=-.8ex]current bounding box.center)}] \node [signal, draw, text=white, fill=red!65!black, signal to=nowhere,signal from=east]{\large{ #1}};}{}
+
+
+\newenvironment{mydemosample}{\stepcounter{mydemonum} \tikz [baseline={([yshift=-.8ex]current bounding box.center)}] \shade [ball color=blue] (0,0) circle (1ex); \colorbox{blue!30}{例句 \themydemonum}
+\\
+\rule{0.2\textwidth}{0.5mm} \begin{quotation}}{\end{quotation}}
+
+%易错示例
+\newcounter{mywrongnum}
+\newenvironment{mywrongsample}[1][]{\refstepcounter{mywrongnum} \tikz [baseline={([yshift=-.8ex]current bounding box.center)}] \shade [ball color=red] (0,0) circle (1ex); \colorbox{blue!30}{易错例\themywrongnum- \vspace{0.5cm}} \tikz [baseline={([yshift=-.8ex]current bounding box.center)}] \node [signal, draw, text=white, fill=red!65!black, signal to=nowhere,signal from=east]{\large{ #1}};}{}
+
+
+%%[2016-12-22] 无赖的翘舌，鼻音，l/n等区别的字词整理例
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% myEasyRead
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 2016-12-22继续扩展上面的环境，打算做一个词汇积累类型的新环境,这个目前打算用来做英语的扩展词汇用,最终目标
+%也是替换掉上自己写的简单的myexpand环境
+%% FROM - http://tex.stackexchange.com/questions/135871/what-are-the-relative-strong-and-weak-points-between-tcolorbox-and-mdframed
+%\tcbset{colback=Salmon!50!white,colframe=FireBrick!75!black, width=(\linewidth-8mm)/2,before=,after=\hfill,equal height group=ske}
+\newcounter{myEasyReadCnt}
+\newenvironment{myEasyRead}[1][]
+  {\refstepcounter{myEasyReadCnt}\begin{tcolorbox}[
+    colback=red!5,
+    colframe=blue!40!black,
+    title=\large{读音整理 - \themyEasyReadCnt : #1}]
+  }
+  {\end{tcolorbox}}
+
+%%[2016-12-22] 易用错的字词整理例
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% myEasyWrong
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 2016-12-22继续扩展上面的环境，打算做一个词汇积累类型的新环境,这个目前打算用来做英语的扩展词汇用,最终目标
+%也是替换掉上自己写的简单的myexpand环境
+%% FROM - http://tex.stackexchange.com/questions/135871/what-are-the-relative-strong-and-weak-points-between-tcolorbox-and-mdframed
+%\tcbset{colback=Salmon!50!white,colframe=FireBrick!75!black, width=(\linewidth-8mm)/2,before=,after=\hfill,equal height group=ske}
+\newcounter{myEasyWrongCnt}
+\newenvironment{myEasyWrong}[1][]
+  {\refstepcounter{myEasyWrongCnt}\begin{tcolorbox}[
+    colback=red!5,
+    colframe=blue!40!black,
+    title=\large{易错词汇 - \themyEasyWrongCnt : #1}]
+  }
+  {\end{tcolorbox}}
+
+%%成语的整理
+\definecolor{greentitle}{RGB}{61,170,61}
+\definecolor{greentitleback}{RGB}{0,0,0}
+\newcounter{myCYCnt}
+%例题的输出设置
+\newenvironment{myCY}[1]
+  {\begin{mdframed}[
+    frametitle=#1,
+    frametitlefont=\normalfont\large,
+    topline=false,
+    settings = \refstepcounter{myCYCnt},%% let it referece-able
+    bottomline=false,
+    rightline=false,
+    linecolor=greentitleback,
+    linewidth=1pt,
+    singleextra={
+      \node[draw,
+        overlay,align=right,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        font=\Large\thekai
+      ] at (O|-P) {成语~\themyCYCnt};
+      },
+    firstextra={
+      \node[draw,
+        overlay,align=right,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        font=\Large\thekai
+      ] at (O|-P) {成语~\themyCYCnt};
+      }
+    ]
+  }
+  {\end{mdframed}}
+
+
+%% 【2016-12-22】阅读训练
+%是替换掉上面的自己写的简单的myexpand环境
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% myReadList
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%来源：http://tex.stackexchange.com/questions/171951/how-was-this-tip-box-produced/171954#171954
+\newcounter{myReadListCounter}
+
+\newmdenv[
+hidealllines=true,
+innertopmargin=16pt,
+innerbottommargin=10pt,
+font=\sffamily\large,
+leftmargin=0.0cm,
+rightmargin=0.0cm,
+skipabove=35pt,
+skipbelow=15pt,
+singleextra={
+  \coordinate (aux) at ( $ (O)!0.1!(P) $ );
+  \fill[rounded corners=8pt,line width=1pt,gray!10]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) {[sharp corners] --
+    ([yshift=-6pt]P) --
+    ([yshift=-6pt]O|-P) } -- cycle;
+  \draw[rounded corners=8pt,line width=1pt,gray]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) --
+    (P|-O) --
+    (O) -- cycle;
+  \node at ([xshift=2cm,yshift=6pt]aux|-P)
+    {\refstepcounter{myReadListCounter}\sffamily\LARGE 阅读训练~\themyReadListCounter} ;
+  },
+firstextra={
+  \coordinate (aux) at ( $ (O)!0.5!(P|-O) $ );
+  \fill[rounded corners=8pt,line width=1pt,gray!10,overlay]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) {[sharp corners] --
+    ([yshift=-6pt]P) --
+    ([yshift=-6pt]O|-P) } -- cycle;
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O) --
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) --
+    (P|-O);
+  \node[overlay] at ([xshift=2cm,yshift=6pt]aux|-P)
+    {\refstepcounter{myReadListCounter}\sffamily\LARGE 阅读训练~\themyReadListCounter} ;
+  },
+middleextra={
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O|-P) --
+    (O);
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (P) --
+    (P|-O);
+  },
+secondextra={
+  \coordinate (aux) at ( $ (O)!0.5!(P|-O) $ );
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O|-P) --
+    (O) --
+    (P|-O) --
+    (P);
+  },
+]{myReadList}
+
+
+%
+%来源：http://tex.stackexchange.com/questions/171951/how-was-this-tip-box-produced/171954#171954
+\newcounter{myPoemListCounter}
+
+\newmdenv[
+hidealllines=true,
+innertopmargin=16pt,
+innerbottommargin=10pt,
+font=\sffamily\large,
+leftmargin=0.0cm,
+rightmargin=0.0cm,
+skipabove=35pt,
+skipbelow=15pt,
+singleextra={
+  \coordinate (aux) at ( $ (O)!0.1!(P) $ );
+  \fill[rounded corners=8pt,line width=1pt,gray!10]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) {[sharp corners] --
+    ([yshift=-6pt]P) --
+    ([yshift=-6pt]O|-P) } -- cycle;
+  \draw[rounded corners=8pt,line width=1pt,gray]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) --
+    (P|-O) --
+    (O) -- cycle;
+  \node at ([xshift=2cm,yshift=6pt]aux|-P)
+    {\refstepcounter{myPoemListCounter}\sffamily\large 诗词~\themyPoemListCounter} ;
+  },
+firstextra={
+  \coordinate (aux) at ( $ (O)!0.5!(P|-O) $ );
+  \fill[rounded corners=8pt,line width=1pt,gray!10,overlay]
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) {[sharp corners] --
+    ([yshift=-6pt]P) --
+    ([yshift=-6pt]O|-P) } -- cycle;
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O) --
+    (O|-P) --
+    (aux|-P) --
+    ([yshift=20pt]aux|-P) --
+    ([yshift=20pt,xshift=4cm]aux|-P) --
+    ([xshift=4cm]aux|-P) --
+    (P) --
+    (P|-O);
+  \node[overlay] at ([xshift=2cm,yshift=6pt]aux|-P)
+    {\refstepcounter{myPoemListCounter}\sffamily\large 诗词~\themyReadListCounter} ;
+  },
+middleextra={
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O|-P) --
+    (O);
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (P) --
+    (P|-O);
+  },
+secondextra={
+  \coordinate (aux) at ( $ (O)!0.5!(P|-O) $ );
+  \draw[rounded corners=8pt,line width=1pt,gray,overlay]
+    (O|-P) --
+    (O) --
+    (P|-O) --
+    (P);
+  },
+]{myPoemList}
+
+%下面一个是段落间距，一个是行间距
+%\setlength{\parskip}{0.5\baselineskip}
+\renewcommand{\baselinestretch}{1.5} \normalsize
+\renewcommand{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{.5\textwidth}
+\renewcommand{\textflush}{flushepinormal}
+\makeatletter
+% Taken and updated from http://mirrors.ctan.org/macros/latex/contrib/epigraph/epigraph.dtx
+\renewcommand{\@epitext}[1]{%
+  \begin{minipage}{\epigraphwidth}\begin{\textflush} \hspace*{20pt}#1\\
+    \ifdim\epigraphrule>\z@ \@epirule \else \vspace*{-.5\baselineskip} \fi
+  \end{\textflush}\end{minipage}}
+\makeatother
+
+\makeindex
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+本文档记录语文相关内容，以便于{\large{杨语欣}{}}学习语文功课，积累知识.
+\end{abstract}
+
+\newpage
+
+\input basic.tex
+
+% 文言文
+\input guwen.tex
+
+%% 练习题的整理
+\section{语文练习题}
+
+\begin{question}[tags={xiaoxuecy}]
+补全成语:
+
+  \begin{tasks}(3)
+     \task 废\blank[width=0.5cm]{寝}忘\blank[width=0.5cm]{食}
+     \task 舍\blank[width=0.5cm]{己}为\blank[width=0.5cm]{人}
+     \task 同心\blank[width=0.5cm]{协}力
+     \task 居\blank[width=0.5cm]{安}思\blank[width=0.5cm]{危}
+     \task 万古长\blank[width=0.5cm]{青}
+     \task 神机\blank[width=0.5cm]{妙}算
+  \end{tasks}
+
+\end{question}
+\begin{solution}\marginpar{小学毕业题}
+  XX
+\end{solution}
+
+\printindex
+
+\end{document}
+
